@@ -1,1 +1,1 @@
-export * from "./country-test";
+export * from "./country";

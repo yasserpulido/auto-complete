@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { AutoComplete } from "./components";
-import { Country } from "./types/country-test";
+import { Country } from "./types/country";
 import "./styles/app.css";
 
 const App = () => {
