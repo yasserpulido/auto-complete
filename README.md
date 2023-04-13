@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### `npm install`
+
+Install necesary packages first.
+
 ### `npm start`
 
 Runs the app in the development mode.\
