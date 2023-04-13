@@ -1,0 +1,14 @@
+#root *,
+#root *::before,
+#root *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fdcb6e;
+}
+
+.app {
+  width: 400px;
+  margin: 100px auto 0;
+}
