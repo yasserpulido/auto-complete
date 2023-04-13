@@ -1,35 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Country } from "../../types";
-import "./auto-complete.css";
 import { useHighlight } from "../../hooks";
+import "./auto-complete.css";
 
 type AutoCompleteProps<T extends Country> = {
   placeholder: string;
   data: T[];
+  setName: (name: string) => void;
+  value: string;
 };
 
 const AutoComplete = <T extends Country>({
   placeholder,
   data,
+  setName,
+  value,
 }: AutoCompleteProps<T>) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { highlightText } = useHighlight();
-  const [search, setSearch] = useState<string>("");
-  const [filteredData, setFilteredData] = useState<T[]>([]);
-
-  useEffect(() => {
-    if (search.length > 0) {
-      const result = data.filter((d) =>
-        d.name.common.toLowerCase().includes(search.toLowerCase())
-      );
-      setFilteredData(result);
-    } else {
-      setFilteredData([]);
-    }
-  }, [data, search]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setSearch(e.target.value.replace(/^\s+/, ""));
+    setName(e.target.value.replace(/^\s+/, ""));
   };
 
   return (
@@ -38,21 +30,24 @@ const AutoComplete = <T extends Country>({
         placeholder={placeholder}
         type="text"
         onChange={(e) => handleChange(e)}
-        value={search}
+        value={value}
+        onFocus={() => setIsOpen(true)}
+        onMouseDown={() => setIsOpen(false)}
       />
-      {filteredData.length > 0 && (
+      {isOpen && data.length > 0 && (
         <ul>
-          {filteredData.map((d) => {
+          {data.map((d) => {
             const { string, highlightedString, endString } = highlightText(
               d,
-              search
+              value
             );
 
             return (
               <li
                 key={d.name.common}
                 onClick={() => {
-                  setSearch(d.name.common);
+                  setName(d.name.common);
+                  setIsOpen(false);
                 }}
               >
                 {string}
