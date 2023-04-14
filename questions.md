@@ -80,10 +80,33 @@ function SecondComponent(props) {
 FirstComponent(SecondComponent)
 ```
 
-
-1. what's the difference in handling exceptions in promises, callbacks and
+7. what's the difference in handling exceptions in promises, callbacks and
 async...await.
-1. How many arguments does setState take and why is it async.
-2. List the steps needed to migrate a Class to Function Component.
-3.  List a few ways styles can be used with components.
-4.  How to render an HTML string coming from the server.
+
+In promises, we use .catch() to handle exceptions.\
+In callbacks, we use try...catch.\
+In async...await, we use try...catch.
+
+8. How many arguments does setState take and why is it async.
+
+An arguments is an object with the new state.\
+It is async because it is not guaranteed that the state will be updated immediately.
+
+9.  List the steps needed to migrate a Class to Function Component.
+
+- Remove constructor and state.
+- Convert life-cycle methods to effects.
+- Change this.props to props.
+- Change render to return.
+- Remove this.
+- Adjust data flow.
+
+10.  List a few ways styles can be used with components.
+
+- Inlines styles.
+- CCS styles.
+- Styled components
+
+11. How to render an HTML string coming from the server.
+
+with dangerouslySetInnerHTML.
